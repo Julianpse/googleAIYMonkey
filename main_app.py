@@ -3,6 +3,7 @@ import os
 import tornado.ioloop
 import tornado.web
 import tornado.log
+from database import *
 
 from jinja2 import \
  Environment, PackageLoader, select_autoescape
@@ -13,11 +14,7 @@ import aiy_voice_app.psycopg2
 
 from os import environ
 
-# Global vars below
-  
-username = environ.get('DATABASE_USERNAME', None)
-access_key = environ.get('DATABASE_PASS', None)
-database_endpoint= environ.get('DATABASE_ENDPOINT', None)
+
 
 
 ENV = Environment(
@@ -26,18 +23,12 @@ ENV = Environment(
     
 )
 
-# These variables open the database connection
-conn = psycopg2.connect("dbname='voice_monkey', user='{}' host='{}' port={} password='{}'".format(username, database_endpoint, 5432, access_key))
-cur = conn.cursor()
+
 
 
 class TemplateHandler(tornado.web.RequestHandler):
     def initialize(self):
-        try:
-            conn
-            cur
-        except:
-            print("I am unable to connect to the database, please check your connection")
+        connect_to_postgres()
 
     def render_template (self, tpl, context):
         template = ENV.get_template(tpl)
