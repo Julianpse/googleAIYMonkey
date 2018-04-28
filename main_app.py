@@ -11,14 +11,23 @@ import psycopg2
 
 import aiy_voice_app.psycopg2
 
+from os import environ
+
+# Global vars below
+  
+username = environ.get('DATABASE_USERNAME', None)
+access_key = environ.get('DATABASE_PASS', None)
+database_endpoint= environ.get('DATABASE_ENDPOINT', None)
+
 
 ENV = Environment(
     loader=PackageLoader('voiceapp', 'templates'),
-    autoescape=select_autoescape(['html', 'xml'])
+    autoescape=select_autoescape(['html', 'xml']),
+    
 )
 
 # These variables open the database connection
-conn = psycopg2.connect("dbname='voice_monkey', user='voicemonkey' host='dcgroupproject.cszqs53dxn5e.us-east-2.rds.amazonaws.com' password='helloWorld'")
+conn = psycopg2.connect("dbname='{}', user='voicemonkey' host='{}' password='{}'".format(username, password))
 cur = conn.cursor()
 
 
