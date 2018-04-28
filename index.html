@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AIY Monkey</title>
+
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<style>
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+   width: 100%;
+}
+
+#body {
+  padding:10px;
+  min-height: calc(100vh - 40px);
+ }
+
+.navbar-default {
+  background-color: #31beec;
+  height: 50%;
+}
+
+.navbar-brand{
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.well{
+  text-align: center;
+  height: 500px;
+  width: 340px;
+  background-color: #f8f8f8;
+  overflow-y: scroll;
+}
+
+.card {
+  background-color: #d8dcdd;
+  border-radius: 25px;
+  padding: 20px;
+  width: 200px;
+  height: 70px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#delete{
+  margin-left:100%;
+  margin-top: -20px;
+}
+
+
+@media only screen and (min-width: 792px;) {
+  .well{
+    margin-left: 50px;
+    width: 600px;
+  }
+}
+
+</style>
+<body>
+<div id="container">
+  <!-- Navigation -->
+  <nav class="navbar navbar-default">
+  <a class="navbar-brand" href="#">
+    <img src="images/monkeyailogowhite.png" width="150" height="auto" alt="">
+  </a>
+</nav>
+
+<div id="body">
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <h2>Todo List</h2>
+        <div class="well">
+          <div class="col-sm-6 col-md-6 col-lg-6" id="todoList">
+
+        <div class="card" id="todo">
+          <p>Pick up dinner</p>
+          <div id="delete">
+            <p>x</p>
+          </div>
+        </div>
+
+
+         </div>
+       </div>
+    </div>
+
+
+
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <h2>Completed List</h2>
+      <div class="well">
+        <div class="col-sm-6 col-md-6 col-lg-6" id="completeList">
+
+      <!-- <div class="card" id="completed">
+            <div id="delete">
+              <p>x</p>
+            </div>
+          </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+</div>
+</div>
+
+
+<!-- js/jquery for bootstrap -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+//dummy variable
+var eventIDs = [0,1,2,3,4,5,6,7,8,9,10];
+
+$(document).ready(function() {
+  doingToDone();
+  deleteFromList();
+});
+
+function doingToDone(){
+  $("#todo").click(function(){
+  $("#todo").appendTo("#completeList");
+  $("#todo").attr("id","#completed");
+  });
+}
+
+//Need to get this to work
+function doneToDoing() {
+  $("#completed").click(function(){
+  $("#completed").appendTo("#todoList");
+  $("#completed").attr("id","#todo");
+  });
+}
+
+//This is deleting every item in the list because they share the same class
+function deleteFromList(){
+  $("#delete").click(function(){
+    alert("You will delete this from your list");
+    $(".card").remove();
+  });
+}
+
+//This needs work
+function incrementIDs(){
+  for(i = 0; i < eventIDs.length; i++){
+    $(".card").attr('id', `number${i}`);
+  };
+}
+
+
+
+</script>
+
+</body>
+</html>
