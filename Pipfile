@@ -9,6 +9,8 @@ name = "pypi"
 
 tornado = "*"
 "jinja2" = "*"
+"psycopg2" = "*"
+heroku = "*"
 
 
 [dev-packages]
