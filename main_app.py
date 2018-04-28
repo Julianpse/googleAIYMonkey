@@ -27,7 +27,7 @@ ENV = Environment(
 )
 
 # These variables open the database connection
-conn = psycopg2.connect("dbname='{}', user='voicemonkey' host='{}' password='{}'".format(username, password))
+conn = psycopg2.connect("dbname='voice_monkey', user='{}' host='{}' port={} password='{}'".format(username, database_endpoint, 5432, access_key))
 cur = conn.cursor()
 
 
