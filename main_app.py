@@ -22,7 +22,41 @@ conn = psycopg2.connect("dbname='voice_monkey', user='voicemonkey' host='dcgroup
 cur = conn.cursor()
 
 
-class MainHandler(tornado.web.RequestHandler):
+class TemplateHandler(tornado.web.RequestHandler):
+    def initialize(self):
+        try:
+            conn
+            cur
+        except:
+            print("I am unable to connect to the database, please check your connection")
+
+    def render_template (self, tpl, context):
+        template = ENV.get_template(tpl)
+        context['page'] = self.request.path
+        self.write(template.render(**context))
+
+class MainHandler(TemplateHandler):
     def get(self):
+        self.set_header(
+            'Cache-Control',
+            'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("", {})
+
         
 def make_app():
+    return tornado.web.Application([
+        (r"/", MainHandler),
+        (
+          r"/static/(.*)",
+          tornado.web.StaticFileHandler,
+          {'path': 'static'}
+        ),
+    ], autoreload=True)
+
+if __name__ == "__main__":
+    tornado.log.enable_pretty_logging()
+
+    app = make_app()
+    PORT = int('8000')
+    app.listen(PORT)
+    tornado.ioloop.IOLoop.current().start()
