@@ -9,7 +9,6 @@ from jinja2 import \
 
 import psycopg2
 
-import aiy_voice_app.psycopg2
 
 from os import environ
 
@@ -27,9 +26,8 @@ ENV = Environment(
 )
 
 # These variables open the database connection
-conn = psycopg2.connect("dbname='voice_monkey', user='{}' host='{}' port={} password='{}'".format(username, database_endpoint, 5432, access_key))
+conn = psycopg2.connect(dbname='voice_monkey', user=username, host=database_endpoint, password=access_key)
 cur = conn.cursor()
-
 
 class TemplateHandler(tornado.web.RequestHandler):
     def initialize(self):
@@ -46,17 +44,23 @@ class TemplateHandler(tornado.web.RequestHandler):
 
 class MainHandler(TemplateHandler):
     def get(self):
+        
+        cur.execute('SELECT * FROM to_do_list;')
+        tasks = cur.fetchall()
+        print(tasks)
+        cur.close()
+        conn.close()
+
         self.set_header(
             'Cache-Control',
             'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("", {})
-
+        self.render_template("index.html", {})
+        
         
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
-        (
-          r"/static/(.*)",
+        (r"/static/(.*)",
           tornado.web.StaticFileHandler,
           {'path': 'static'}
         ),
@@ -66,6 +70,5 @@ if __name__ == "__main__":
     tornado.log.enable_pretty_logging()
 
     app = make_app()
-    PORT = int('8000')
-    app.listen(PORT)
+    app.listen(int(os.environ.get('PORT', '8000')))
     tornado.ioloop.IOLoop.current().start()
