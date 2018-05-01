@@ -47,15 +47,14 @@ class MainHandler(TemplateHandler):
         
         cur.execute('SELECT * FROM to_do_list;')
         tasks = cur.fetchall()
-        print(tasks)
-        cur.close()
-        conn.close()
 
         self.set_header(
             'Cache-Control',
             'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("index.html", {})
+        self.render_template("index.html", {'tasks' : tasks})
         
+        cur.close()
+        conn.close()
         
 def make_app():
     return tornado.web.Application([
