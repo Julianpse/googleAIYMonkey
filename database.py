@@ -1,6 +1,8 @@
 import psycopg2
 import os
 from os import environ
+import json
+from datetime import datetime
 # Global vars below
   
 username = environ.get('DATABASE_USERNAME', None)
@@ -41,6 +43,8 @@ def changeStatus(iD):
         conn.commit()
         cur.close()
         conn.close()
+        
+
 
 def removeTask(iD):
     connect_to_postgres()
@@ -48,8 +52,33 @@ def removeTask(iD):
     conn.commit()
     cur.close()
     conn.close()
+
+    
+def openTasks():
+    connect_to_postgres()
+    cur.execute("SELECT id, task, status FROM to_do_list WHERE status = 'open' ORDER BY update_ts DESC;")
+    rows = cur.fetchall()
+    rowList = []
+    for i in rows:
+        a = list(i)
+        rowList.append(a)
+    rl = json.dumps(rowList)
+    print(rl)
+    return rl
+
+def closedTasks():
+    connect_to_postgres()
+    cur.execute("SELECT id, task, status FROM to_do_list WHERE status = 'closed' ORDER BY update_ts DESC;")
+    rows = cur.fetchall()
+    rowList = []
+    for i in rows:
+        a = list(i)
+        rowList.append(a)
+    rl = json.dumps(rowList)
+    print(rl)
+    return rl
+   
     
 
-
-
-
+openTasks()
+closedTasks()
