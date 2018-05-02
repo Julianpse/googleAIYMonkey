@@ -87,13 +87,17 @@ h2 {
 <div class="container">
   <div class="row">
 
+  <div id="test">
+
+  </div>
+
 
     <div class="col-sm-6 col-md-6 col-lg-6">
       <h2>Todo List</h2>
         <div class="well">
           <div class="col-sm-6 col-md-6 col-lg-6" id="todoList">
 
-        <div class="card" id="todo">
+        <!--<div class="card" id="todo">-->
 
           <div id="delete">
             <p>x</p>
@@ -140,6 +144,7 @@ h2 {
 <script>
 
 var openTasks = {{open_tasks | jsonvalue | safe }};
+var openTaskObject = JSON.parse(openTasks);
 var closedTasks = {{closed_tasks | jsonvalue | safe }};
 
 $(document).ready(function() {
@@ -147,6 +152,18 @@ $(document).ready(function() {
   doingToDone();
   deleteFromList();
 });
+
+function showOpenTasks(openTaskObject){
+  var task = [];
+  openTaskObject.forEach(function(element){
+    task.push(element[1]);
+  });
+    console.log(task);
+    task.forEach(function(string){
+      $("#todoList").append(`<div class="card" id="todo">${string}</div>`)
+      console.log(string);
+  });
+}
 
 function doingToDone(){
   $("#todo").click(function(){
