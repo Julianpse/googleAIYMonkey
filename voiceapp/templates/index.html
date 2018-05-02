@@ -22,7 +22,9 @@ body {
    padding:0;
    height:100%;
    width: 100%;
+   font-size: 9pt;
 }
+
 
 #body {
   padding:10px;
@@ -76,10 +78,11 @@ h2 {
 </style>
 <body>
 <div id="container">
+
   <!-- Navigation -->
   <nav class="navbar navbar-default">
   <a class="navbar-brand" href="#">
-    <img src="images/monkeyailogowhite.png" width="150" height="auto" alt="">
+    <img src="static/images/monkeyAILogoWhite.png" width="250" height="auto" alt="">
   </a>
 </nav>
 
@@ -88,7 +91,6 @@ h2 {
   <div class="row">
 
   <div id="test">
-
   </div>
 
 
@@ -107,7 +109,6 @@ h2 {
 
          </div>
        </div>
-    </div>
 
 
 
@@ -125,14 +126,11 @@ h2 {
           </div>
         </div>
       </div>
+
     </div>
-
-
-
   </div>
 </div>
-</div>
-</div>
+
 
 
 <!-- js/jquery for bootstrap -->
@@ -148,22 +146,27 @@ var openTaskObject = JSON.parse(openTasks);
 var closedTasks = {{closed_tasks | jsonvalue | safe }};
 
 $(document).ready(function() {
-
-  doingToDone();
-  deleteFromList();
+  showOpenTasks(openTaskObject);
 });
 
 function showOpenTasks(openTaskObject){
   var task = [];
   openTaskObject.forEach(function(element){
-    task.push(element[1]);
-  });
-    console.log(task);
-    task.forEach(function(string){
-      $("#todoList").append(`<div class="card" id="todo">${string}</div>`)
-      console.log(string);
+    $("#todoList").append(`<div class="card ${element[2]}" id="${element[0]}">${element[1]}</div>`);
   });
 }
+
+// function showOpenTasks(openTaskObject){
+//   var task = [];
+//   openTaskObject.forEach(function(element){
+//     task.push(element[1]);
+//   });
+//     console.log(task);
+//     task.forEach(function(string){
+//       $("#todoList").append(`<div class="card" id="todo">${string}</div>`)
+//       console.log(string);
+//   });
+// }
 
 function doingToDone(){
   $("#todo").click(function(){
