@@ -24,8 +24,7 @@ ENV = Environment(
 
 
 # These variables open the database connection
-conn = psycopg2.connect(dbname='voice_monkey', user=username, host=database_endpoint, password=access_key)
-cur = conn.cursor()
+
 
 
 class TemplateHandler(tornado.web.RequestHandler):
@@ -39,14 +38,17 @@ class TemplateHandler(tornado.web.RequestHandler):
 
 class MainHandler(TemplateHandler):
     def get(self):
+        insert_tasks = insertTask() 
+        change_status = changeStatus()
+        remove_task = removeTask()
+        open_tasks = openTasks()
+        closed_tasks = closedTasks()
         
-        cur.execute('SELECT * FROM to_do_list;')
-        tasks = cur.fetchall()
 
         self.set_header(
             'Cache-Control',
             'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("index.html", {'tasks' : tasks})
+        self.render_template("index.html", {'open_tasks' : open_tasks, 'closed_tasks' : closed_tasks, 'insert_tasks' : insert_tasks, 'change_status' : change_status, 'remove_task' : remove_task})
         
         cur.close()
         conn.close()
