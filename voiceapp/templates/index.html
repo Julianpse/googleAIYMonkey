@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="static/images/monkeyAILogoBlue.png">
   <title>AIY Monkey</title>
 
   <!-- Bootstrap 4 -->
@@ -101,21 +102,19 @@ h2 {
 
         <!--<div class="card" id="todo">-->
 
-          <div id="delete">
+          <!-- <div id="delete">
             <p>x</p>
-          </div>
+          </div> -->
         </div>
-
-
-         </div>
        </div>
+     </div>
 
 
 
     <div class="col-sm-6 col-md-6 col-lg-6">
       <h2>Completed List</h2>
       <div class="well">
-        <div class="col-sm-6 col-md-6 col-lg-6" id="completeList">
+        <div class="col-sm-6 col-md-6 col-lg-6" id="completedList">
 
       <!-- <div class="card" id="completed">
             <div id="delete">
@@ -143,16 +142,31 @@ h2 {
 
 var openTasks = {{open_tasks | jsonvalue | safe }};
 var openTaskObject = JSON.parse(openTasks);
+
 var closedTasks = {{closed_tasks | jsonvalue | safe }};
+var closedTaskObject = JSON.parse(closedTasks);
 
 $(document).ready(function() {
   showOpenTasks(openTaskObject);
+  showClosedTasks(closedTaskObject);
+  deleteFromList();
 });
 
 function showOpenTasks(openTaskObject){
   var task = [];
   openTaskObject.forEach(function(element){
-    $("#todoList").append(`<div class="card ${element[2]}" id="${element[0]}">${element[1]}</div>`);
+    $("#todoList").append(`<div class="card ${element[2]}" id="${element[0]}">${element[1]}<div id="delete${element[0]}">
+      <p>x</p>
+    </div></div>`);
+  });
+}
+
+function showClosedTasks(closedTaskObject){
+  var task = [];
+  closedTaskObject.forEach(function(element){
+    $("#completedList").append(`<div class="card ${element[2]}" id="${element[0]}">${element[1]}<div id="delete${element[0]}">
+      <p>x</p>
+    </div></div>`);
   });
 }
 
@@ -183,11 +197,11 @@ function doneToDoing() {
   });
 }
 
-//This is deleting every item in the list because they share the same class
+//WORKS**** NEED TO add in the DATABASE FUNCTION to make it actually change the database
 function deleteFromList(){
-  $("#delete").click(function(){
+  $('.card').children().click(function(){
     alert("You will delete this from your list");
-    $(".card").remove();
+      $(this).parent().remove();
   });
 }
 

@@ -42,7 +42,7 @@ class MainHandler(TemplateHandler):
     def get(self):
         # insert_tasks = insertTask("feed the cat")
         # change_status = changeStatus(2)
-        # remove_task = removeTask(7)
+        # remove_task = removeTask(self.cur)
         open_tasks = openTasks(self.cur)
         closed_tasks = closedTasks(self.cur)
 
