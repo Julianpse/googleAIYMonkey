@@ -94,7 +94,7 @@ h2 {
           <div class="col-sm-6 col-md-6 col-lg-6" id="todoList">
 
         <div class="card" id="todo">
-          <p>Pick up dinner</p>
+
           <div id="delete">
             <p>x</p>
           </div>
@@ -139,10 +139,11 @@ h2 {
 
 <script>
 
-//dummy variable
-var eventIDs = [0,1,2,3,4,5,6,7,8,9,10];
+var openTasks = {{open_tasks | jsonvalue | safe }};
+var closedTasks = {{closed_tasks | jsonvalue | safe }};
 
 $(document).ready(function() {
+
   doingToDone();
   deleteFromList();
 });
