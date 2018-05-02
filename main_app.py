@@ -48,7 +48,8 @@ class MainHandler(TemplateHandler):
         self.set_header(
             'Cache-Control',
             'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("index.html", {'open_tasks' : open_tasks, 'closed_tasks' : closed_tasks, 'insert_tasks' : insert_tasks, 'change_status' : change_status, 'remove_task' : remove_task})
+        self.render_template("index.html", {'open_tasks' : open_tasks, 'closed_tasks' : closed_tasks, 'insert_tasks' : insert_tasks,\
+         'change_status' : change_status, 'remove_task' : remove_task})
         
         cur.close()
         conn.close()
