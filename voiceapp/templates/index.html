@@ -26,10 +26,10 @@ body {
    font-size: 9pt;
 }
 
-
 #body {
   padding:10px;
   min-height: calc(100vh - 40px);
+  background: linear-gradient(#31beec, white);
  }
 
 .navbar-default {
@@ -43,29 +43,49 @@ body {
 
 h2 {
   text-align: center;
+  color: #36382e;
 }
 
 .well{
   text-align: center;
   height: 500px;
   width: 340px;
-  background-color: #f8f8f8;
+  background-color: #DADAD9;
   overflow-y: scroll;
+  border-radius: 15px;
+}
+
+li {
+  list-style: none;
 }
 
 .card {
-  background-color: #d8dcdd;
+  background-color: #36382e;
   border-radius: 25px;
   padding: 20px;
-  width: 200px;
+  width: 240px;
   height: 70px;
   margin-bottom: 15px;
   text-align: center;
+  color: white;
 }
 
-#delete{
-  margin-left:100%;
+.x-icon{
+  margin-left: 240px;
   margin-top: -20px;
+  color: white;
+  display: block;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 30px; /* or 50% */
+
+  background-color: #f06449;
+  color: white;
+  text-align: center;
+  font-size: 1em;
 }
 
 
@@ -99,12 +119,19 @@ h2 {
       <h2>Todo List</h2>
         <div class="well">
           <div class="col-sm-6 col-md-6 col-lg-6" id="todoList">
-
-        <!--<div class="card" id="todo">-->
-
-          <!-- <div id="delete">
-            <p>x</p>
-          </div> -->
+            <ul>
+              <!--
+                  Cards get appended to here
+                     Ex:
+                     <li>
+                     <div class="card" id="completed">
+                      <div id="todo">
+                        <p>x</p>
+                      </div>
+                      </div>
+                    </li>
+              -->
+            </ul>
         </div>
        </div>
      </div>
@@ -115,13 +142,19 @@ h2 {
       <h2>Completed List</h2>
       <div class="well">
         <div class="col-sm-6 col-md-6 col-lg-6" id="completedList">
-
-      <!-- <div class="card" id="completed">
-            <div id="delete">
-              <p>x</p>
-            </div>
-          </div> -->
-
+            <ul>
+      <!--
+          Cards get appended to here
+             Ex:
+             <li>
+             <div class="card" id="completed">
+              <div id="delete">
+                <p>x</p>
+              </div>
+              </div>
+            </li>
+      -->
+            </ul>
           </div>
         </div>
       </div>
@@ -149,47 +182,42 @@ var closedTaskObject = JSON.parse(closedTasks);
 $(document).ready(function() {
   showOpenTasks(openTaskObject);
   showClosedTasks(closedTaskObject);
+  doingToDone();
   deleteFromList();
 });
 
+// These two functions below load all of the tasks in the database
 function showOpenTasks(openTaskObject){
   var task = [];
   openTaskObject.forEach(function(element){
-    $("#todoList").append(`<div class="card ${element[2]}" id="${element[0]}">${element[1]}<div id="delete${element[0]}">
-      <p>x</p>
-    </div></div>`);
+    $("#todoList").append(`<li><div class="card ${element[2]}" id="${element[0]}">${element[1]}
+      <h6 class = "x-icon">x</h6>
+    </div></li>`);
   });
 }
 
 function showClosedTasks(closedTaskObject){
   var task = [];
   closedTaskObject.forEach(function(element){
-    $("#completedList").append(`<div class="card ${element[2]}" id="${element[0]}">${element[1]}<div id="delete${element[0]}">
-      <p>x</p>
-    </div></div>`);
+    $("#completedList").append(`<li><div class="card ${element[2]}" id="${element[0]}">${element[1]}
+      <h6 class = "x-icon">x</h6>
+    </div></li>`);
   });
 }
 
-// function showOpenTasks(openTaskObject){
-//   var task = [];
-//   openTaskObject.forEach(function(element){
-//     task.push(element[1]);
-//   });
-//     console.log(task);
-//     task.forEach(function(string){
-//       $("#todoList").append(`<div class="card" id="todo">${string}</div>`)
-//       console.log(string);
-//   });
-// }
 
+//WORKS**** NEED TO add in the DATABASE FUNCTION to make it actually change the status in the database
 function doingToDone(){
-  $("#todo").click(function(){
-  $("#todo").appendTo("#completeList");
-  $("#todo").attr("id","#completed");
-  });
+  var clicks = 0;
+  if (clicks == 0) {
+    $('.card').click(function(){
+    $(this).appendTo("#completedList");
+    clicks ++;
+      });
+  }
 }
 
-//Need to get this to work
+//This doesn't work yet. Need to work on this.
 function doneToDoing() {
   $("#completed").click(function(){
   $("#completed").appendTo("#todoList");
@@ -203,13 +231,6 @@ function deleteFromList(){
     alert("You will delete this from your list");
       $(this).parent().remove();
   });
-}
-
-//This needs work
-function incrementIDs(){
-  for(i = 0; i < eventIDs.length; i++){
-    $(".card").attr('id', `number${i}`);
-  };
 }
 
 
