@@ -229,7 +229,7 @@ function doneToDoing() {
 //WORKS**** NEED TO add in the DATABASE FUNCTION to make it actually change the database
 function deleteFromList(){
   $('.card').children().click(function(){
-    alert("You will delete this from your list");
+    confirm("Are you sure you want to remove this from your list?");
       $(this).parent().remove();
   });
 }
