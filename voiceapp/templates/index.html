@@ -212,6 +212,7 @@ function doingToDone(){
   if (clicks == 0) {
     $('.card').click(function(){
     $(this).appendTo("#completedList");
+    $(this).attr("class","card closed");
     clicks ++;
       });
   }
