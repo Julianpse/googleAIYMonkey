@@ -62,6 +62,7 @@ class StatusHandler(MainHandler):
     def post(self):
         data_object = tornado.escape.json_decode(self.request.body)
         print('Post data received')
+        return data_object
 
 def make_app():
     return tornado.web.Application([

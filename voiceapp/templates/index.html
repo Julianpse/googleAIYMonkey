@@ -310,10 +310,11 @@ function doingToDone(){
   var clicks = 0;
   if (clicks == 0) {
     $('.card').click(function(){
-    $(this).appendTo("#completedList");
-    $(this).attr("class","card closed");
-    clicks ++;
-    ajaxPost();
+      $(this).appendTo("#completedList");
+      $(this).attr("class","card closed");
+      var objectID = $(this)[0].id;
+      clicks ++;
+      ajaxPost(objectID);
     });
   }
 }
@@ -335,13 +336,12 @@ function deleteFromList(){
 }
 
 //ajax post
-function ajaxPost(){
+function ajaxPost(param){
   $.ajax("/status", {
-    data: JSON.stringify($(this).data()),
+    data: JSON.stringify(param),
     type: 'POST',
     contentType: 'application/json'
   });
-  console.log($(this).data());
 }
 
 
