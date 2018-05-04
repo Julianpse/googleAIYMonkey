@@ -27,8 +27,10 @@ def escapejs(val):
 def jsonvalue(val):
     return json.dumps(val)
 
+
 ENV.filters['escapejs'] = escapejs
 ENV.filters['jsonvalue'] = jsonvalue
+
 
 class TemplateHandler(tornado.web.RequestHandler):
     def initialize(self):
@@ -38,6 +40,8 @@ class TemplateHandler(tornado.web.RequestHandler):
         template = ENV.get_template(tpl)
         context['page'] = self.request.path
         self.write(template.render(**context))
+
+
 
 class MainHandler(TemplateHandler):
     def post(self):
@@ -50,9 +54,6 @@ class MainHandler(TemplateHandler):
 
 
     def get(self):
-        # insert_tasks = insertTask("feed the cat")
-        # change_status = changeStatus(2)
-        # remove_tasks = removeTask(self.cur)
         open_tasks = openTasks(self.cur)
         closed_tasks = closedTasks(self.cur)
 
@@ -61,11 +62,9 @@ class MainHandler(TemplateHandler):
             'no-store, no-cache, must-revalidate, max-age=0')
         self.render_template("index.html", {'open_tasks' : open_tasks, 'closed_tasks' : closed_tasks})
 
-        # self.render_template("index.html", {'open_tasks' : open_tasks, 'closed_tasks' : closed_tasks, 'insert_tasks' : insert_tasks,\
-        #  'change_status' : change_status, 'remove_task' : remove_task})
-
         self.cur.close()
         self.conn.close()
+
 
 class DeleteHandler(MainHandler):
     def post(self):
@@ -74,11 +73,14 @@ class DeleteHandler(MainHandler):
         print('Delete data received' + str(delete_object))
 
 
+
 class StatusHandler(MainHandler):
     def post(self):
         data_object = int(tornado.escape.json_decode(self.request.body))
         changeStatus(data_object)
         print('Change data received' + str(data_object))
+
+
 
 class ErrorHandler(TemplateHandler):
     def get (self):
@@ -87,12 +89,16 @@ class ErrorHandler(TemplateHandler):
             'no-store, no-cache, must-revalidate, max-age=0')
         self.render_template("error.html", {})
 
+
+
 class SuccessHandler(TemplateHandler):
     def get (self):
         self.set_header(
             'Cache-Control',
             'no-store, no-cache, must-revalidate, max-age=0')
         self.render_template("success.html", {})
+
+
 
 def make_app():
     return tornado.web.Application([
@@ -106,6 +112,8 @@ def make_app():
           {'path': 'static'}
         ),
     ], autoreload=True)
+
+
 
 if __name__ == "__main__":
     tornado.log.enable_pretty_logging()
