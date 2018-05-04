@@ -98,7 +98,7 @@ def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/status", StatusHandler),
-        (r"/delete", DeleteHandler),
+        (r"/deleted", DeleteHandler),
         (r"/error", ErrorHandler),
         (r"/success", SuccessHandler),
         (r"/static/(.*)",

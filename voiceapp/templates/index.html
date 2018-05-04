@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,11 @@
   <!-- Bootstrap 4 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+  <!-- CSS style -->
+  <link rel="stylesheet" href="static/css/style.css">
 
 </head>
 <style>
-
 .container{
   margin-left: 7%;
 }
@@ -198,30 +200,29 @@ html, body {
     overflow-x: hidden;
 }
 
-
-
 </style>
 
 <div id="container">
   <!-- Navigation -->
   <nav class="navbar navbar-default">
-  <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="#">
     <img src="static/images/monkeyAILogoWhite.png" width="250" height="auto" alt="">
   </a>
-</nav>
+  </nav>
 
-<div id="body">
-<div class="container">
+  <div id="body">
+    <div class="container">
 
-  <div class="row">
+      <div class="row">
 
 
-    <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class = "headers"><h2>Todo List</h2></div>
-        <div class="well">
-          <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6" id="todoList">
-            <ul>
-              <!--
+        <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="headers">
+            <h2>Todo List</h2></div>
+          <div class="well">
+            <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6" id="todoList">
+              <ul>
+                <!--
                   Cards get appended to here
                      Ex:
                      <li>
@@ -232,18 +233,19 @@ html, body {
                       </div>
                     </li>
               -->
-            </ul>
+              </ul>
+            </div>
+          </div>
         </div>
-       </div>
-     </div>
 
 
-    <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class = "headers"><h2>Completed List</h2></div>
-      <div class="well">
-        <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6" id="completedList">
-            <ul>
-      <!--
+        <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="headers">
+            <h2>Completed List</h2></div>
+          <div class="well">
+            <div class="columns col-xs-6 col-sm-6 col-md-6 col-lg-6" id="completedList">
+              <ul>
+                <!--
           Cards get appended to here
              Ex:
              <li>
@@ -254,120 +256,132 @@ html, body {
               </div>
             </li>
       -->
-            </ul>
+              </ul>
+            </div>
           </div>
         </div>
+
+
       </div>
-
-
     </div>
   </div>
-</div>
-<form class = "form" method = "POST">
-  <div class="input-group">
-  <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" type="submit">Add Task</button>
+  <form class="form" method="POST">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary" type="submit">Add Task</button>
+      </div>
+      <label for="task_input"></label>
+      <input name="task_input" type="text" class="form-control" id="task_input" aria-label="" aria-describedby="basic-addon1" placeholder="Add a new task here">
+    </div>
+  </form>
+  <div class="footer">
+    <h6>Made with <span style="color:red">♥</span> at	&#32; <img id= "dcLogo" src = "https://www.digitalcrafts.com/img/digitalcrafts-site-logo.png"/></h6>
   </div>
-    <label for="task_input"></label>
-    <input name = "task_input" type="text" class="form-control" id="task_input" aria-label="" aria-describedby="basic-addon1" placeholder="Add a new task here">
-  </div>
-</form>
-<div class="footer">
-<h6>Made with <span style="color:red">♥</span> at	&#32; <img id= "dcLogo" src = "https://www.digitalcrafts.com/img/digitalcrafts-site-logo.png"/></h6>
-</div>
 
 
-<!-- js/jquery for bootstrap -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- js/jquery for bootstrap -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<!--jquery-->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
+  <!--jquery-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-var openTasks = {{open_tasks | jsonvalue | safe }};
-var openTaskObject = JSON.parse(openTasks);
+  <!--Scripts for App -->
+  <script src="/googleAIYMonkey/static/js/script.js"></script>
 
-var closedTasks = {{closed_tasks | jsonvalue | safe }};
-var closedTaskObject = JSON.parse(closedTasks);
-
-$(document).ready(function() {
-  showOpenTasks(openTaskObject);
-  showClosedTasks(closedTaskObject);
-  changeStatus();
-  deleteFromList();
-});
-
-
-// These two functions below load all of the tasks in the database
-function showOpenTasks(openTaskObject){
-  var task = [];
-  openTaskObject.forEach(function(element){
-    $("#todoList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
-      <h6 class = "x-icon" id="${element[0]}">x</h6>
-  </div></li>`);
+  <script>
+  $(document).ready(function() {
+    showOpenTasks(openTaskObject);
+    showClosedTasks(closedTaskObject);
+    changeStatus();
+    deleteFromList();
   });
-}
 
-function showClosedTasks(closedTaskObject){
-  var task = [];
-  closedTaskObject.forEach(function(element){
-    $("#completedList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
-      <h6 class = "x-icon" id="${element[0]}">x</h6>
+  var openTasks = {{open_tasks | jsonvalue | safe}};
+  var openTaskObject = JSON.parse(openTasks);
+
+  var closedTasks = {{closed_tasks | jsonvalue | safe }};
+  var closedTaskObject = JSON.parse(closedTasks);
+
+
+  // These two functions below load all of the tasks in the database
+  function showOpenTasks(openTaskObject){
+    var task = [];
+    openTaskObject.forEach(function(element){
+      $("#todoList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
+        <h6 class = "x-icon" id="${element[0]}">x</h6>
     </div></li>`);
-  });
-}
-
-
-//Changes status between todo and completed
-function changeStatus(){
-  var clicks = 0;
-  if (clicks == 0) {
-    $('.card').click(function(event){
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      if($(this).hasClass("card open")){
-        $(this).appendTo("#completedList");
-        $(this).attr("class","card closed");
-
-      } else if ($(this).hasClass("card closed")) {
-        $(this).appendTo("#todoList");
-        $(this).attr("class","card open");
-      }
-        var objectID = $(this)[0].id;
-        clicks ++;
-        ajaxPost(objectID);
     });
   }
-}
+
+  function showClosedTasks(closedTaskObject){
+    var task = [];
+    closedTaskObject.forEach(function(element){
+      $("#completedList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
+        <h6 class = "x-icon" id="${element[0]}">x</h6>
+      </div></li>`);
+    });
+  }
 
 
-//Bug happening where the change status function is getting called instead
-function deleteFromList(){
-  $('.x-icon').click(function(e){
-      e.stopPropagation();
-      confirm("Are you sure you want to remove this from your list?");
-        $(this).parent().remove();
-        console.log($(this));
-        var objectID = $(this)[0].id;
-        console.log(objectID);
-        ajaxPost(objectID);
-  });
-}
+  //Changes status between todo and completed
+  function changeStatus(){
+    var clicks = 0;
+    if (clicks == 0) {
+      $('.card').click(function(event){
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        if($(this).hasClass("card open")){
+          $(this).appendTo("#completedList");
+          $(this).attr("class","card closed");
 
-//ajax post
-function ajaxPost(param){
-  $.ajax("/status", {
-    data: JSON.stringify(param),
-    type: 'POST',
-    contentType: 'application/json'
-  });
-}
+        } else if ($(this).hasClass("card closed")) {
+          $(this).appendTo("#todoList");
+          $(this).attr("class","card open");
+        }
+          var objectID = $(this)[0].id;
+          clicks ++;
+          ajaxPost(objectID);
+      });
+    }
+  }
 
 
-</script>
+  //Bug happening where the change status function is getting called instead
+  function deleteFromList(){
+    $('.x-icon').click(function(e){
+        e.stopPropagation();
+        confirm("Are you sure you want to remove this from your list?");
+          $(this).parent().remove();
+          console.log($(this));
+          var objectID = $(this)[0].id;
+          console.log(objectID);
+          ajaxPostDelete(objectID);
+    });
+  }
 
-</body>
+  //ajax post status
+  function ajaxPost(param){
+    $.ajax("/status", {
+      data: JSON.stringify(param),
+      type: 'POST',
+      contentType: 'application/json'
+    });
+  }
+
+  //ajax post delete
+  function ajaxPostDelete(param){
+    $.ajax("/deleted", {
+      data: JSON.stringify(param),
+      type: 'POST',
+      contentType: 'application/json'
+    });
+  }
+
+  </script>
+
+  </body>
+
 </html>
