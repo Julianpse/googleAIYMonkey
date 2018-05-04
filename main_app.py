@@ -9,6 +9,7 @@ from jinja2 import \
  Environment, PackageLoader, select_autoescape
 
 import psycopg2
+import requests
 import json
 
 from os import environ
@@ -46,7 +47,6 @@ class MainHandler(TemplateHandler):
         open_tasks = openTasks(self.cur)
         closed_tasks = closedTasks(self.cur)
 
-
         self.set_header(
             'Cache-Control',
             'no-store, no-cache, must-revalidate, max-age=0')
@@ -58,9 +58,15 @@ class MainHandler(TemplateHandler):
         self.cur.close()
         self.conn.close()
 
+class StatusHandler(MainHandler):
+    def post(self):
+        data_object = tornado.escape.json_decode(self.request.body)
+        print('Post data received')
+
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
+        (r"/status", StatusHandler),
         (r"/static/(.*)",
           tornado.web.StaticFileHandler,
           {'path': 'static'}

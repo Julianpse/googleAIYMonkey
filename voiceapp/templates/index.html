@@ -261,13 +261,14 @@ html, body {
 </div>
 
 
-
 <!-- js/jquery for bootstrap -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<!--jquery-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
 var openTasks = {{open_tasks | jsonvalue | safe }};
@@ -288,7 +289,7 @@ $(document).ready(function() {
 function showOpenTasks(openTaskObject){
   var task = [];
   openTaskObject.forEach(function(element){
-    $("#todoList").append(`<li><div class="card ${element[2]}" id="${element[0]}">${element[1]}
+    $("#todoList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
       <h6 class = "x-icon">x</h6>
     </div></li>`);
   });
@@ -312,7 +313,8 @@ function doingToDone(){
     $(this).appendTo("#completedList");
     $(this).attr("class","card closed");
     clicks ++;
-      });
+    ajaxPost();
+    });
   }
 }
 
@@ -332,6 +334,15 @@ function deleteFromList(){
   });
 }
 
+//ajax post
+function ajaxPost(){
+  $.ajax("/status", {
+    data: JSON.stringify($(this).data()),
+    type: 'POST',
+    contentType: 'application/json'
+  });
+  console.log($(this).data());
+}
 
 
 </script>
