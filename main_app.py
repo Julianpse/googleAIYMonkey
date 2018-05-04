@@ -63,12 +63,22 @@ class StatusHandler(MainHandler):
         data_object = int(tornado.escape.json_decode(self.request.body))
         changeStatus(data_object)
         print('Post data received')
-        return data_object
+
+
+
+class DeleteHandler(MainHandler):
+    def post(self):
+        delete_object = int(tornado.escape.json_decode(self.request.body))
+        removeTask(delete_object)
+        print('Post data received')
+        
+
 
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/status", StatusHandler),
+        (r"/delete", DeleteHandler),
         (r"/static/(.*)",
           tornado.web.StaticFileHandler,
           {'path': 'static'}

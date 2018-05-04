@@ -290,7 +290,7 @@ function showOpenTasks(openTaskObject){
   var task = [];
   openTaskObject.forEach(function(element){
     $("#todoList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
-      <h6 class = "x-icon">x</h6>
+      <h6 class = "x-icon" id="${element[0]}">x</h6>
     </div></li>`);
   });
 }
@@ -298,8 +298,8 @@ function showOpenTasks(openTaskObject){
 function showClosedTasks(closedTaskObject){
   var task = [];
   closedTaskObject.forEach(function(element){
-    $("#completedList").append(`<li><div class="card ${element[2]}" id="${element[0]}">${element[1]}
-      <h6 class = "x-icon">x</h6>
+    $("#completedList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
+      <h6 class = "x-icon" id="${element[0]}">x</h6>
     </div></li>`);
   });
 }
@@ -332,6 +332,9 @@ function deleteFromList(){
   $('.card').children().click(function(){
     confirm("Are you sure you want to remove this from your list?");
       $(this).parent().remove();
+      var objectID = $(this)[0].id;
+      console.log(objectID);
+      ajaxPost(objectID);
   });
 }
 
