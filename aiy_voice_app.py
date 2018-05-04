@@ -19,7 +19,7 @@ import logging
 import aiy.audio
 import aiy.cloudspeech
 import aiy.voicehat
-from database.py import *
+from database import *
 
 def main():
     recognizer = aiy.cloudspeech.get_recognizer()
@@ -47,7 +47,9 @@ def main():
             elif 'new task' in text:
                 mytask = text.replace('new task', '', 1)
                 aiy.audio.say('Task recorded.' + mytask)
-                insertTask(mytask)
+                insertTask(str(mytask))
+                print(mytask)
+		
             elif 'goodbye' in text:
                 break
 
