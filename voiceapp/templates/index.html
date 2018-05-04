@@ -46,6 +46,12 @@ body {
   margin: 0 auto;
 }
 
+.form{
+  text-align: center;
+  margin-bottom: 50px;
+
+}
+
 h2 {
   text-align: center;
   color: #36382e;
@@ -206,6 +212,7 @@ html, body {
 
 <div id="body">
 <div class="container">
+
   <div class="row">
 
 
@@ -256,6 +263,15 @@ html, body {
     </div>
   </div>
 </div>
+<form class = "form" method = "POST">
+  <div class="input-group">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary" type="submit">Add Task</button>
+  </div>
+    <label for="task_input"></label>
+    <input name = "task_input" type="text" class="form-control" id="task_input" aria-label="" aria-describedby="basic-addon1" placeholder="Add a new task here">
+  </div>
+</form>
 <div class="footer">
 <h6>Made with <span style="color:red">♥</span> at	&#32; <img id= "dcLogo" src = "https://www.digitalcrafts.com/img/digitalcrafts-site-logo.png"/></h6>
 </div>
@@ -280,7 +296,7 @@ var closedTaskObject = JSON.parse(closedTasks);
 $(document).ready(function() {
   showOpenTasks(openTaskObject);
   showClosedTasks(closedTaskObject);
-  doingToDone();
+  changeStatus();
   deleteFromList();
 });
 
@@ -291,7 +307,7 @@ function showOpenTasks(openTaskObject){
   openTaskObject.forEach(function(element){
     $("#todoList").append(`<li><div data-status="${element[2]}" data-id="${element[0]}" class="card ${element[2]}" id="${element[0]}">${element[1]}
       <h6 class = "x-icon" id="${element[0]}">x</h6>
-    </div></li>`);
+  </div></li>`);
   });
 }
 
@@ -305,36 +321,39 @@ function showClosedTasks(closedTaskObject){
 }
 
 
-//WORKS**** NEED TO add in the DATABASE FUNCTION to make it actually change the status in the database
-function doingToDone(){
+//Changes status between todo and completed
+function changeStatus(){
   var clicks = 0;
   if (clicks == 0) {
-    $('.card').click(function(){
-      $(this).appendTo("#completedList");
-      $(this).attr("class","card closed");
-      var objectID = $(this)[0].id;
-      clicks ++;
-      ajaxPost(objectID);
+    $('.card').click(function(event){
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      if($(this).hasClass("card open")){
+        $(this).appendTo("#completedList");
+        $(this).attr("class","card closed");
+
+      } else if ($(this).hasClass("card closed")) {
+        $(this).appendTo("#todoList");
+        $(this).attr("class","card open");
+      }
+        var objectID = $(this)[0].id;
+        clicks ++;
+        ajaxPost(objectID);
     });
   }
 }
 
-//This doesn't work yet. Need to work on this.
-function doneToDoing() {
-  $("#completed").click(function(){
-  $("#completed").appendTo("#todoList");
-  $("#completed").attr("id","#todo");
-  });
-}
 
-//WORKS**** NEED TO add in the DATABASE FUNCTION to make it actually change the database
+//Bug happening where the change status function is getting called instead
 function deleteFromList(){
-  $('.card').children().click(function(){
-    confirm("Are you sure you want to remove this from your list?");
-      $(this).parent().remove();
-      var objectID = $(this)[0].id;
-      console.log(objectID);
-      ajaxPost(objectID);
+  $('.x-icon').click(function(e){
+      e.stopPropagation();
+      confirm("Are you sure you want to remove this from your list?");
+        $(this).parent().remove();
+        console.log($(this));
+        var objectID = $(this)[0].id;
+        console.log(objectID);
+        ajaxPost(objectID);
   });
 }
 

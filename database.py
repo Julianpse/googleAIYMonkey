@@ -41,8 +41,6 @@ def changeStatus(iD):
         conn.commit()
 
 
-
-
 def removeTask(iD):
     conn, cur = connect_to_postgres()
     cur.execute("DELETE FROM to_do_list WHERE id= "+str(iD)+";")

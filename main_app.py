@@ -40,10 +40,19 @@ class TemplateHandler(tornado.web.RequestHandler):
         self.write(template.render(**context))
 
 class MainHandler(TemplateHandler):
+    def post(self):
+        insert_task_input = self.get_body_argument('task_input')
+        if insert_task_input:
+            insertTask(insert_task_input)
+            self.redirect(r"/success")
+        else:
+            self.redirect(r"/error")
+
+
     def get(self):
         # insert_tasks = insertTask("feed the cat")
         # change_status = changeStatus(2)
-        # remove_task = removeTask(self.cur)
+        # remove_tasks = removeTask(self.cur)
         open_tasks = openTasks(self.cur)
         closed_tasks = closedTasks(self.cur)
 
@@ -58,27 +67,40 @@ class MainHandler(TemplateHandler):
         self.cur.close()
         self.conn.close()
 
-class StatusHandler(MainHandler):
-    def post(self):
-        data_object = int(tornado.escape.json_decode(self.request.body))
-        changeStatus(data_object)
-        print('Post data received')
-
-
-
 class DeleteHandler(MainHandler):
     def post(self):
         delete_object = int(tornado.escape.json_decode(self.request.body))
         removeTask(delete_object)
-        print('Post data received')
-        
+        print('Delete data received' + str(delete_object))
 
+
+class StatusHandler(MainHandler):
+    def post(self):
+        data_object = int(tornado.escape.json_decode(self.request.body))
+        changeStatus(data_object)
+        print('Change data received' + str(data_object))
+
+class ErrorHandler(TemplateHandler):
+    def get (self):
+        self.set_header(
+            'Cache-Control',
+            'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("error.html", {})
+
+class SuccessHandler(TemplateHandler):
+    def get (self):
+        self.set_header(
+            'Cache-Control',
+            'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("success.html", {})
 
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/status", StatusHandler),
         (r"/delete", DeleteHandler),
+        (r"/error", ErrorHandler),
+        (r"/success", SuccessHandler),
         (r"/static/(.*)",
           tornado.web.StaticFileHandler,
           {'path': 'static'}
