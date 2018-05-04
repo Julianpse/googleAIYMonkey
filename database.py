@@ -5,9 +5,9 @@ import json
 from datetime import datetime
 # Global vars below
 
-username = environ.get('DATABASE_USERNAME', None)
-access_key = environ.get('DATABASE_PASS', None)
-database_endpoint= environ.get('DATABASE_ENDPOINT', None)
+username = os.environ.get('DATABASE_USERNAME', None)
+access_key = os.environ.get('DATABASE_PASS', None)
+database_endpoint= os.environ.get('DATABASE_ENDPOINT', None)
 
 
 def connect_to_postgres():
@@ -23,7 +23,7 @@ def connect_to_postgres():
 
 
 def insertTask(message):
-    connect_to_postgres()
+    conn, cur = connect_to_postgres()
     cur.execute("INSERT INTO to_do_list VALUES (DEFAULT, '"+message+"');")
     conn.commit()
 
