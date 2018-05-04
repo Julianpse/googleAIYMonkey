@@ -29,7 +29,7 @@ def insertTask(message):
 
 
 def changeStatus(iD):
-    connect_to_postgres()
+    conn, cur = connect_to_postgres()
     cur.execute("SELECT status FROM to_do_list WHERE id="+str(iD)+";")
     state = cur.fetchone()[0]
     if(state == 'open'):

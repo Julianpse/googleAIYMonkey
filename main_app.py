@@ -60,7 +60,8 @@ class MainHandler(TemplateHandler):
 
 class StatusHandler(MainHandler):
     def post(self):
-        data_object = tornado.escape.json_decode(self.request.body)
+        data_object = int(tornado.escape.json_decode(self.request.body))
+        changeStatus(data_object)
         print('Post data received')
         return data_object
 
