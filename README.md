@@ -61,5 +61,6 @@ the device solely through command line and nano.
 
 
 
-Team Members
+Team Members:
+
 Julian Se, Bobby Neelon, Nick Schmidt, Dalton
