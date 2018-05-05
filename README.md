@@ -33,17 +33,7 @@ the aiy_voice_app.py
 
 Tools Used:
 
-PostgreSQL
-Tornado/Python
-Jinja
-Psycopg2
-HTML
-CSS
-Javascript
-jQuery
-Heroku
-Google Assistant API
-Google AIY Voice Kit
+PostgreSQL, Tornado/Python, Jinja, Psycopg2, HTML, CSS, Javascript, jQuery, Heroku, Google Assistant API, Google AIY, Voice Kit
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
