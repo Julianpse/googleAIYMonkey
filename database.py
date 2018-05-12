@@ -24,7 +24,7 @@ def connect_to_postgres():
 
 def insertTask(message):
     conn, cur = connect_to_postgres()
-    cur.execute("INSERT INTO to_do_list VALUES (DEFAULT, '"+message+"');")
+    cur.execute("INSERT INTO to_do_list VALUES (DEFAULT, %s);", [message]) 
     conn.commit()
 
 
