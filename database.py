@@ -18,13 +18,13 @@ def connect_to_postgres():
         conn
         cur
     except:
-        print("I am unable to connect to the database, please check your connection")
+        print("I can't to connect to the database, please check your connection")
     return conn, cur
 
 
 def insertTask(message):
     conn, cur = connect_to_postgres()
-    cur.execute("INSERT INTO to_do_list VALUES (DEFAULT, %s);", [message]) 
+    cur.execute("INSERT INTO to_do_list VALUES (DEFAULT, %s);", [message])
     conn.commit()
 
 
