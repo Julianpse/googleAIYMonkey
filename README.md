@@ -1,7 +1,7 @@
 # googleAIYMonkey
 Digital Crafts Project 1 - Modifying google assistant API
 
-# Technology Used: HTML, CSS, Bootstrap, jQuery, AJAX, JavaScript, Python, Tornado, PostgreSQL, Heroku, Google Assistant API, Google AIY Voice Kit (Raspberry Pi Zero).
+#### Technology Used: HTML, CSS, Bootstrap, jQuery, AJAX, JavaScript, Python, Tornado, PostgreSQL, Heroku, Google Assistant API, Google AIY Voice Kit (Raspberry Pi Zero).
 
 MVP Goals
 
