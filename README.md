@@ -1,7 +1,7 @@
 # googleAIYMonkey
 Digital Crafts Project 1 - Modifying google assistant API
 
-Technology Used: HTML, CSS, Bootstrap, jQuery, AJAX, JavaScript, Python, Tornado, PostgreSQL
+# Technology Used: HTML, CSS, Bootstrap, jQuery, AJAX, JavaScript, Python, Tornado, PostgreSQL, Heroku, Google Assistant API, Google AIY Voice Kit (Raspberry Pi Zero).
 
 MVP Goals
 
@@ -30,14 +30,6 @@ http://voice-monkey.herokuapp.com/
 
 In order to add data to the database you will need a Google AIY voice kit running
 the aiy_voice_app.py
-
-
-
-Tools Used:
-
-PostgreSQL, Tornado/Python, Jinja, Psycopg2, HTML, CSS, Javascript, jQuery, Heroku, Google Assistant API, Google AIY, Voice Kit
-
-
 
 
 Challenges/Lessons Learned:
