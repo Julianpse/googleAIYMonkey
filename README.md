@@ -1,6 +1,8 @@
 # googleAIYMonkey
 Digital Crafts Project 1 - Modifying google assistant API
 
+Technology Used: HTML, CSS, Bootstrap, jQuery, AJAX, JavaScript, Python, Tornado, PostgreSQL
+
 MVP Goals
 
 1. Have Google assistant recognize custom voice commands 
